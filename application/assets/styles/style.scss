@@ -1,0 +1,9 @@
+/* Foundations */
+@import "../../../foundations/_main";
+
+/* Fonts */
+@import "../fonts/_webfonts";
+
+/* Application specific */
+@import "../../vertical/scss/_main";
+@import "../../pages/home/scss/_main"; // Home sample
