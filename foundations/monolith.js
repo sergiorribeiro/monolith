@@ -18,6 +18,8 @@ function monolith() {
         }
     }
 
+    self.currentPage = "";
+
     self.attachables = {}
 
     self.utils = {
@@ -136,6 +138,7 @@ function monolith() {
 
         var params = "monolith_navigation";
         params += "&page=" + page;
+        self.currentPage = page;
 
         self.utils.fetchAsync("/" + page,params,function(response){
             var buffer = document.querySelector("[data-relevance='buffer']");
