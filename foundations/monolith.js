@@ -1,6 +1,10 @@
 function monolith() {
     var self = this;
 
+    self.options = {
+        allowSamePageNavigation: false
+    }
+
     var navstarted_event = new Event("monolith_navigation_started");
     var navended_event = new Event("monolith_navigation_ended");
     var preloadstarted_event = new Event("monolith_preload_started");
@@ -129,6 +133,10 @@ function monolith() {
     }
 
     self.navigate = function(page,transition) {
+
+        if(!self.options.allowSamePageNavigation && page == self.currentPage)
+            return;
+
         document.querySelector("monolith-event-emitter").dispatchEvent(navstarted_event);
         document.querySelector("monolith-event-emitter").dispatchEvent(preloadstarted_event);
         if(!transition)
