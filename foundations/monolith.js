@@ -170,6 +170,7 @@ function monolith() {
 
             history.pushState({}, "", page);
             self.attachScripts(buffer);
+            self.attachNavigation();
             document.querySelector("monolith-event-emitter").dispatchEvent(navended_event);
         });        
     }
@@ -192,6 +193,15 @@ function monolith() {
         node.querySelectorAll("[data-attach]").forEach(function(n){
             var attachableName = n.dataset.attach + "Attachable";
             self.attachables[attachableName] = new window[attachableName](n);
+        });
+    }
+
+    self.attachNavigation = function() {
+        document.querySelectorAll("[data-goto]").forEach(function(mi){
+            if(mi.dataset.navigationHandled == "yes")
+                return;
+            mi.addEventListener("click",window.navigation.goto);
+            mi.dataset.navigationHandled = "yes";
         });
     }
 
