@@ -3,5 +3,13 @@
         const defaultPage = "home";
         const omitDefaultRoute = true;
         const allowSamePageNavigation = false;
+        const modules = array(
+            "hyperdux" => array(
+                "databaseHost" => "localhost",
+                "databaseName" => "lbd",
+                "databaseUsername" => "root",
+                "databasePassword" => ""
+            )
+        );
     }
 ?>

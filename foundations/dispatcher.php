@@ -9,6 +9,14 @@
 
         function __construct($requestdata) {
             $this->requestdata = $requestdata;
+
+            foreach(Configuration::modules as $module=>$module_conf){
+
+                // alert exception when doesn exist
+
+                extract($module_conf,EXTR_OVERWRITE);
+                require_once(__FD_DIR . "modules/{$module}.php");
+            }
         }
 
         function render() {

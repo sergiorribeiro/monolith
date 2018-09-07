@@ -16,6 +16,8 @@
         }
 
         function content(){
+            global $_db;
+            
             $data = array(
                 "somevar" => "hey!"
             );
