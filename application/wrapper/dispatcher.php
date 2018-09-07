@@ -32,7 +32,10 @@
             
             $reps = array(
                 "PAGE" => $this->requestdata['page'],
-                "SCRIPTPACK" => $scriptpack
+                "SCRIPTPACK" => $scriptpack,
+                "OMIT_DEFAULT_ROUTE" => Configuration::omitDefaultRoute,
+                "DEFAULT_PAGE" => Configuration::defaultPage,
+                "ALLOW_SAME_PAGE_NAV" => Configuration::allowSamePageNavigation
             );
 
             foreach($reps as $key => $value)

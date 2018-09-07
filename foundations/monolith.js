@@ -1,10 +1,5 @@
 function monolith() {
     var self = this;
-
-    self.options = {
-        allowSamePageNavigation: false
-    }
-
     var navstarted_event = new Event("monolith_navigation_started");
     var navended_event = new Event("monolith_navigation_ended");
     var preloadstarted_event = new Event("monolith_preload_started");
@@ -134,7 +129,7 @@ function monolith() {
 
     self.navigate = function(page,transition) {
 
-        if(!self.options.allowSamePageNavigation && page == self.currentPage)
+        if(page == self.currentPage && !(monolith_stack.configs.allowSamePageNavigation == "1"))
             return;
 
         document.querySelector("monolith-event-emitter").dispatchEvent(navstarted_event);
@@ -168,7 +163,11 @@ function monolith() {
                 jsi.parentNode.removeChild(jsi);
 			}
 
-            history.pushState({}, "", page);
+            if(monolith_stack.configs.defaultPage == page && monolith_stack.configs.omitDefaultRoute == "1")
+                history.pushState({}, "", "/");
+            else
+                history.pushState({}, "", page);
+
             self.attachScripts(buffer);
             self.attachNavigation();
             document.querySelector("monolith-event-emitter").dispatchEvent(navended_event);
