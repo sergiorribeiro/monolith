@@ -10,12 +10,12 @@
         function __construct($requestdata) {
             $this->requestdata = $requestdata;
 
-            foreach(Configuration::modules as $module=>$module_conf){
-
-                // alert exception when doesn exist
-
-                extract($module_conf,EXTR_OVERWRITE);
-                require_once(__FD_DIR . "modules/{$module}.php");
+            foreach(Configuration::pluggables as $pluggable=>$pluggable_conf){
+                $pluggablepath = __FD_DIR . "pluggables/{$pluggable}.php";
+                if(!file_exists($pluggablepath))
+                    throw new Exception("Unable to load pluggable \"{$pluggable}\": file not found");
+                extract($pluggable_conf,EXTR_OVERWRITE);
+                require_once($pluggablepath);
             }
         }
 
