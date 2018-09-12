@@ -5,7 +5,9 @@
     $params = array(
         "page" => $page,
         "params" => array_slice($nodes, 1),
-        "postdata" => $_POST
+        "postdata" => $_POST,
+        "getdata" => $_GET,
+        "filedata" => $_FILES
     );
 
     if(strtolower($page) == "static"){
