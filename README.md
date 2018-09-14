@@ -1,4 +1,4 @@
-# monolith framework
+![](https://raw.githubusercontent.com/sergiorribeiro/monolith/master/application/assets/images/monolith.png)
 ## version 0.1a
 ## version 0.2a
 - Better error handling
