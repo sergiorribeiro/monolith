@@ -237,4 +237,27 @@ function monolith() {
     init();
 }
 
-window.monolith = new monolith();
+(function(){
+    function polyfills() {
+        if ( typeof window.CustomEvent !== "function" ){
+            function CustomEvent ( event, params ) {
+                params = params || { bubbles: false, cancelable: false, detail: undefined };
+                var evt = document.createEvent("CustomEvent");
+                evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+                return evt;
+            }
+
+            CustomEvent.prototype = window.Event.prototype;
+
+            window.CustomEvent = CustomEvent;
+            window.Event = CustomEvent;
+        }
+
+        if ( typeof NodeList.prototype.forEach !== "function" ){
+            NodeList.prototype.forEach = Array.prototype.forEach
+        }
+    }
+
+    polyfills();
+    window.monolith = new monolith();
+})();
