@@ -147,7 +147,12 @@ function monolith() {
         self.utils.fetchAsync("/" + page,params,function(response){
             var buffer = document.querySelector("[data-relevance='buffer']");
             var dummy = document.createElement("DIV");
-            response = JSON.parse(response);
+            try {
+                response = JSON.parse(response);
+            } catch(e) {          
+                response.replace("{{WHAT}}","monolith catched an exception that prevents deserialization");      
+                document.write(response);
+            }
             dummy.innerHTML = response.output;
             document.title = response.pagetitle;
             while (dummy.children.length > 0) {

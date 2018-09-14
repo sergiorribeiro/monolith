@@ -1,4 +1,5 @@
+<div>{{WHAT}}</div>
+<hr/>
 <div><?=$ERRMSG?></div>
-<div><?=$ERRFILE?></div>
-<div><?=$ERRLINE?></div>
-<div><?=$ERRTRACE?></div>
+<hr/>
+<div><?="On line $ERRLINE in \"$ERRFILE\""?></div>

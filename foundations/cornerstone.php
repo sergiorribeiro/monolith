@@ -20,6 +20,10 @@
     }
 
     function genericErrorHandler($ERRNO, $ERRMSG, $ERRFILE, $ERRLINE, $ERRTRACE){
+        ob_start();
         require(__FD_DIR . "pages/exception.php");
+        $exceptionmarkup = ob_get_contents();
+        ob_end_clean();
+        echo str_replace("{{WHAT}}","PHP Error",$exceptionmarkup);
     }
 ?>
