@@ -1,0 +1,13 @@
+[data-attach='home'] {
+    #monolith_logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+
+        img {margin-bottom: 15px;}
+
+        p {font-family: sans-serif;}
+    }
+}

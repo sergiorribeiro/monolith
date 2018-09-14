@@ -19,7 +19,7 @@
             global $_db;
             
             $data = array(
-                "somevar" => "hey!"
+                "description" => "PHP developers friendly, hybrid single page application framework"
             );
 
             // All your data are belong to here (yeah, grammar error intended. l2meme)
