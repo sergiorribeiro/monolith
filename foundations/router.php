@@ -1,48 +1,52 @@
 <?php
     $nodes = isset($_GET['path']) ? explode("/",$_GET['path']) : array();
-    $page = count($nodes) > 0 ? $nodes[0] : Configuration::defaultPage;
-    $parametricpage = NULL;
+    $route = implode("/",$nodes);
+    $dispatchername = count($nodes) > 0 ? $nodes[0] : Configuration::defaultDispatcher;
+    if($route == "")
+        $route = $dispatchername;
     $params = array(
-        "page" => $page,
-        "params" => array_slice($nodes, 1),
         "postdata" => $_POST,
         "getdata" => $_GET,
-        "filedata" => $_FILES
+        "filedata" => $_FILES,
+        "cookie" => $_COOKIE
     );
 
-    if(strtolower($page) == "static"){
-        $parametricpage = $params['params'][0];
-        if($d = dispatcherAvailable($parametricpage))
-            processDispatcher($d,$parametricpage,$params);
-    }elseif(isset($_POST['monolith_navigation'])){
-        if($d = dispatcherAvailable($page))
-            processDispatcher($d,$page,$params);
-    }else{
-        processDispatcher(__AP_DIR . "wrapper/dispatcher.php","wrapper",$params);
-    }
+    $routedata = array("type" => "nav","dispatcher" => $dispatchername);
 
-    if(strtolower($page) == "static")
-        $page = $params['params'][0];
-
-    throw new Exception("Dispatcher is missing for page \"$page\"");
-
-    function dispatcherAvailable($dispatcher) {
-        $dispatchers = array_filter(glob(__AP_DIR . "dispatchers/*"), "is_file");
-        foreach($dispatchers as $d){
-            $dn = $d;
-            $dn = strtolower(substr($dn,strripos($dn,"/") + 1));
-            $dn = str_replace(".php","",$dn);
-            if($dn == strtolower($dispatcher)){return $d;}
+    foreach(Configuration::routes as $knownroute => $data) {
+        if(stripos($route,$knownroute) === 0){
+            $routedata = $data;
+            $strippedpath = ltrim(str_replace($knownroute,"",$route),"/");
+            $params['params'] = explode("/",$strippedpath); 
+            break;
         }
+    }
+    
+    if(isset($_POST['monolith_navigation']) || $routedata['type'] == "raw"){
+        if($d = dispatcherExists($routedata['dispatcher']))
+            processDispatcher($d,$routedata['dispatcher'],$routedata['dispatcher'],$params);
+        else
+            throw new Exception("Dispatcher is missing for route \"$route\"");
+    }else{
+        if(dispatcherExists($routedata['dispatcher']))
+            processDispatcher(__FD_DIR . "wrapperdispatcher.php", $routedata['dispatcher'], "wrapper" ,$params);
+        else
+            throw new Exception("Dispatcher is missing for route \"$route\"");
+    }    
+
+    function dispatcherExists($dispatcher) {
+        $dispatcherPath = __AP_DIR . "dispatchers/{$dispatcher}.php";
+        if(file_exists($dispatcherPath))
+            return $dispatcherPath;
         return false;
     }
 
-    function processDispatcher($dispatcher,$dispatchername,$requestdata) {
+    function processDispatcher($dispatcher,$dispatchername,$dispatcherclass,$requestdata) {
         require_once($dispatcher);
-        $dispatcherClassName = ucfirst($dispatchername) . "Dispatcher";
+        $requestdata['page'] = $dispatchername;
+        $dispatcherClassName = ucfirst($dispatcherclass) . "Dispatcher";
         $dispatcherInstance = new $dispatcherClassName($requestdata);
-        $dispatcherInstance->render();
-        $dispatcherInstance->flush();
+        $dispatcherInstance->dispatch();
         exit;
     }
 ?>

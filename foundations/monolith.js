@@ -36,6 +36,23 @@ function monolith() {
             xhttp.open("POST", url, true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send(params);
+        },
+
+        preloadImages: function(images,callback) {
+            var c2rr = 0;
+            var checkCallbackFire = function(){
+                c2rr--;
+                if(c2rr==0)
+                    callback();
+            };
+
+            images.forEach(function(iurl){
+                var img = new Image();
+                img.onload = checkCallbackFire;
+                img.onerror = checkCallbackFire;
+                img.src = iurl;
+                c2rr++;
+            });        
         }
     }
 
@@ -136,7 +153,7 @@ function monolith() {
         document.querySelector("monolith-event-emitter").dispatchEvent(navstarted_event);
         document.querySelector("monolith-event-emitter").dispatchEvent(preloadstarted_event);
         if(!transition)
-            transition = self.consts.stage_transitions.SLIDE_LEFT;
+            transition = self.consts.stage_transitions.CROSSFADE;
 
         queuedTransition = transition;
 
@@ -144,7 +161,7 @@ function monolith() {
         params += "&page=" + page;
         self.currentPage = page;
 
-        self.utils.fetchAsync("/" + page,params,function(response){
+        self.utils.fetchAsync("/" + page ,params,function(response){
             var buffer = document.querySelector("[data-relevance='buffer']");
             var dummy = document.createElement("DIV");
             try {
@@ -169,7 +186,7 @@ function monolith() {
                 jsi.parentNode.removeChild(jsi);
 			}
 
-            if(monolith_stack.configs.defaultPage == page && monolith_stack.configs.omitDefaultRoute == "1")
+            if(monolith_stack.configs.defaultDispatcher == page && monolith_stack.configs.omitDefaultRoute == "1")
                 history.pushState({}, "", "/");
             else
                 history.pushState({}, "", page);
@@ -220,23 +237,6 @@ function monolith() {
 
     self.signalPreloadEnd = function(){
         document.querySelector("monolith-event-emitter").dispatchEvent(preloadended_event);
-    }
-
-    self.preloadImages = function(images,callback) {
-        var c2rr = 0;
-        var checkCallbackFire = function(){
-            c2rr--;
-            if(c2rr==0)
-                callback();
-        };
-
-        images.forEach(function(iurl){
-            var img = new Image();
-            img.onload = checkCallbackFire;
-            img.onerror = checkCallbackFire;
-            img.src = iurl;
-            c2rr++;
-        });        
     }
 
     init();

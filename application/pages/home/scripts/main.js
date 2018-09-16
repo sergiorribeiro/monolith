@@ -4,7 +4,11 @@ function homeAttachable(node) {
     function init() {
         
         // This may vary, but usually, you want to signal preload end at the page init
-        window.monolith.signalPreloadEnd();
+        monolith.utils.preloadImages([
+            "/application/assets/images/monolith.png"
+        ],function(){
+            window.monolith.signalPreloadEnd();
+        });
     }
 
     init();

@@ -3,3 +3,5 @@
 <div><?=$ERRMSG?></div>
 <hr/>
 <div><?="On line $ERRLINE in \"$ERRFILE\""?></div>
+<hr/>
+<hr/>

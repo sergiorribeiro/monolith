@@ -1,16 +1,15 @@
 <?php 
-    class WrapperDispatcher extends Dispatcher {
+    class WrapperDispatcher extends RawDispatcherType {
         
         public $scripts = array();
 
-        function render() {
+        function dispatch() {
             $this->content();
-            parent::render();
+            parent::dispatch();
         }
 
         function __construct($requestdata) {
             parent::__construct($requestdata);
-            $this->outputmode = "direct";
         }
 
         function content(){
@@ -21,7 +20,7 @@
 
             $scriptpack = "";
 
-            foreach(array("pages","vertical") as $target){
+            foreach(Configuration::packableScriptFolders as $target){
                 $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__AP_DIR . $target), RecursiveIteratorIterator::SELF_FIRST);
                 foreach($iterator as $name => $file){
                     if (pathinfo($name, PATHINFO_EXTENSION) == "js") {
@@ -34,7 +33,7 @@
                 "PAGE" => $this->requestdata['page'],
                 "SCRIPTPACK" => $scriptpack,
                 "OMIT_DEFAULT_ROUTE" => Configuration::omitDefaultRoute,
-                "DEFAULT_PAGE" => Configuration::defaultPage,
+                "DEFAULT_DISPATCHER" => Configuration::defaultDispatcher,
                 "ALLOW_SAME_PAGE_NAV" => Configuration::allowSamePageNavigation
             );
 

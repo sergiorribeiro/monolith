@@ -1,18 +1,18 @@
 <?php 
-    class HomeDispatcher extends Dispatcher {
-
-        function render() {
-            ob_start();
-            echo $this->content();
-            $this->output = ob_get_contents();
-            ob_end_clean();
-            parent::render();
-        }
+    class HomeDispatcher extends NavPageDispatcherType {
 
         function __construct($requestdata) {
             $this->name = "home";
             $this->pagetitle = "monolith::Home";
             parent::__construct($requestdata);
+        }
+
+        function dispatch() {
+            ob_start();
+            echo $this->content();
+            $this->output = ob_get_contents();
+            ob_end_clean();
+            parent::dispatch();
         }
 
         function content(){

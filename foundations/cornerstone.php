@@ -3,6 +3,12 @@
     set_error_handler("error_handler");
     require_once(__FD_DIR . "config.php");
     require_once(__FD_DIR . "dispatcher.php");
+
+    $dispatchertypes = array_filter(glob(__FD_DIR . "dispatchertypes/*.php"), "is_file");
+    foreach($dispatchertypes as $dt){
+        require_once($dt);
+    }
+
     require_once(__FD_DIR . "router.php");
 
     function exception_handler($exception) {

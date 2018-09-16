@@ -4,6 +4,10 @@
 - Better error handling
 - IE compliance
 - Pluggables (fancy name for modules)
+## version 0.3a (breaking version)
+- Better router
+- Generic dispatcher
+- Distinguished dispatcher types
 
 ## Raising monolith
 - Copy under a environment capable of executing PHP

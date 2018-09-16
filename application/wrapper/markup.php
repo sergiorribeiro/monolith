@@ -10,7 +10,7 @@
         <script type="text/javascript">
             window.monolith_stack = {
                 configs: {
-                    defaultPage: "{{DEFAULT_PAGE}}",
+                    defaultDispatcher: "{{DEFAULT_DISPATCHER}}",
                     omitDefaultRoute: "{{OMIT_DEFAULT_ROUTE}}",
                     allowSamePageNavigation: "{{ALLOW_SAME_PAGE_NAV}}"
                 },
