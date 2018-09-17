@@ -52,8 +52,13 @@ function monolith() {
                 img.onerror = checkCallbackFire;
                 img.src = iurl;
                 c2rr++;
-            });        
-        }
+            });
+        },
+
+        goto: function(){
+            var page = this.dataset.goto;
+            monolith.navigate(page);
+        },
     }
 
     function init() {
@@ -92,7 +97,7 @@ function monolith() {
                 break;
             case self.consts.stage_transitions.SLIDE_LEFT:
             case self.consts.stage_transitions.SLIDE_RIGHT:
-                
+
                 if(queuedTransition==self.consts.stage_transitions.SLIDE_LEFT)
                     bstyle.transform = "translateX(100%)";
                 if(queuedTransition==self.consts.stage_transitions.SLIDE_RIGHT)
@@ -107,10 +112,10 @@ function monolith() {
                     bstyle.opacity = 1;
                     sstyle.pointerEvents = "none";
                     bstyle.pointerEvents = "all";
-                    
+
                     if(queuedTransition==self.consts.stage_transitions.SLIDE_LEFT)
-                        sstyle.transform = "translateX(-100%)";                        
-                        
+                        sstyle.transform = "translateX(-100%)";
+
                     if(queuedTransition==self.consts.stage_transitions.SLIDE_RIGHT)
                         sstyle.transform = "translateX(100%)";
 
@@ -166,8 +171,8 @@ function monolith() {
             var dummy = document.createElement("DIV");
             try {
                 response = JSON.parse(response);
-            } catch(e) {          
-                response.replace("{{WHAT}}","monolith catched an exception that prevents deserialization");      
+            } catch(e) {
+                response.replace("{{WHAT}}","monolith catched an exception that prevents deserialization");
                 document.write(response);
             }
             dummy.innerHTML = response.output;
@@ -194,7 +199,7 @@ function monolith() {
             self.attachScripts(buffer);
             self.attachNavigation();
             document.querySelector("monolith-event-emitter").dispatchEvent(navended_event);
-        });        
+        });
     }
 
     self.processActionQueue = function() {
@@ -222,7 +227,7 @@ function monolith() {
         document.querySelectorAll("[data-goto]").forEach(function(mi){
             if(mi.dataset.navigationHandled == "yes")
                 return;
-            mi.addEventListener("click",window.navigation.goto);
+            mi.addEventListener("click",window.monolith.utils.goto);
             mi.dataset.navigationHandled = "yes";
         });
     }
