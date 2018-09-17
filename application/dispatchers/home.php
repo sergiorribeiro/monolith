@@ -17,13 +17,13 @@
 
         function content(){
             global $_db;
-            
+
             $data = array(
                 "description" => "PHP developers friendly, hybrid single page application framework"
             );
 
             // All your data are belong to here (yeah, grammar error intended. l2meme)
-            
+
             extract($data,EXTR_OVERWRITE);
             require __AP_DIR . "/pages/{$this->name}/main.php";
         }

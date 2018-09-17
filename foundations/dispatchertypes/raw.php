@@ -3,6 +3,7 @@
 
         function dispatch() {
             echo $this->output;
+            die();
         }
 
         function __construct($requestdata) {

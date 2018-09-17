@@ -8,6 +8,9 @@
 - Better router
 - Generic dispatcher
 - Distinguished dispatcher types
+## version 0.4a
+- Minor tweaks
+- SMTP Mailer Pluggable (PHPMailer SMTP)
 
 ## Raising monolith
 - Copy under a environment capable of executing PHP

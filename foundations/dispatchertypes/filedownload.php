@@ -15,6 +15,7 @@
             header("Pragma: public");
             header("Content-Length: " . filesize($filepath));
             readfile($this->filepath);
+            die();
         }
 
         function __construct($requestdata) {

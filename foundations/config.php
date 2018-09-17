@@ -14,6 +14,14 @@
                 "databaseName" => "lbd",
                 "databaseUsername" => "root",
                 "databasePassword" => ""
+            ),
+            "smtpmailer" => array(
+                "smtpHost" => "localhost",
+                "smtpAuth" => false,
+                "smtpUser" => "",
+                "smtpPassword" => "",
+                "smtpSecure" => "",
+                "smtpPort" => 25
             )
         );
     }

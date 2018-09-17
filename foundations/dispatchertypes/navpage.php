@@ -8,6 +8,7 @@
                 "pagetitle" => $this->pagetitle,
                 "output" => $this->output
             ));
+            die();
         }
 
         function __construct($requestdata) {
