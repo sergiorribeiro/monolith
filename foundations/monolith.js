@@ -219,7 +219,14 @@ function monolith() {
     self.attachScripts = function(node) {
         node.querySelectorAll("[data-attach]").forEach(function(n){
             var attachableName = n.dataset.attach + "Attachable";
-            self.attachables[attachableName] = new window[attachableName](n);
+            try{
+                if(self.attachables[attachableName])
+                    self.attachables[attachableName].push(new window[attachableName](n));
+                else
+                    self.attachables[attachableName] = [new window[attachableName](n)];
+            }catch(ex){
+                document.write("Unable to load \"" + n.dataset.attach + "\" attachable.");
+            }
         });
     }
 
