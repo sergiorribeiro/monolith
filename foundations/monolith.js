@@ -225,7 +225,7 @@ function monolith() {
                 else
                     self.attachables[attachableName] = [new window[attachableName](n)];
             }catch(ex){
-                document.write("Unable to load \"" + n.dataset.attach + "\" attachable.");
+                document.write("Unable to load \"" + n.dataset.attach + "\" attachable. Why: " + ex.message + "<hr/>");
             }
         });
     }
