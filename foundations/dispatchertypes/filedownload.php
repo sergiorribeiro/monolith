@@ -13,7 +13,7 @@
             header("Expires: 0");
             header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
             header("Pragma: public");
-            header("Content-Length: " . filesize($filepath));
+            header("Content-Length: " . filesize($this->filepath));
             readfile($this->filepath);
             die();
         }
