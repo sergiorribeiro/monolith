@@ -23,7 +23,9 @@ function monolith() {
     self.attachables = {}
 
     self.utils = {
-        fetchAsync: function(url,params,action) {
+        fetchAsync: function(url,params,action,method) {
+            if(!method)
+                method = "POST";
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if(this.readyState == 4){
@@ -33,7 +35,7 @@ function monolith() {
                     }
                 }
             };
-            xhttp.open("POST", url, true);
+            xhttp.open(method, url, true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send(params);
         },
