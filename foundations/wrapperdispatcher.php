@@ -1,10 +1,9 @@
-<?php 
+<?php
     class WrapperDispatcher extends RawDispatcherType {
-        
+
         public $scripts = array();
 
         function dispatch() {
-            $this->content();
             parent::dispatch();
         }
 
@@ -28,7 +27,7 @@
                     }
                 }
             }
-            
+
             $reps = array(
                 "PAGE" => $this->requestdata['page'],
                 "SCRIPTPACK" => $scriptpack,

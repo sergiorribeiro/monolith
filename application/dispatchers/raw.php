@@ -1,15 +1,15 @@
 <?php 
-    class CustomDispatcher extends JsonDispatcherType {
+    class RawDispatcher extends RawDispatcherType {
 
         function __construct($requestdata) {
-            $this->name = "custom";
+            $this->name = "raw";
             parent::__construct($requestdata);
         }
 
         function content(){
             global $_db;
 
-            return array("some","sample","data");
+            $this->output = "<h1>Hi there!</h1>";
         }
 
     }

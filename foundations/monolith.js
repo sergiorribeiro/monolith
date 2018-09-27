@@ -9,7 +9,7 @@ function monolith() {
     var queuedTransition = "";
 
     self.consts = {
-        version: "0.4a",
+        version: "0.5a",
         stage_transitions: {
             CROSSFADE: 1,
             SLIDE_LEFT: 2,
@@ -221,13 +221,16 @@ function monolith() {
     self.attachScripts = function(node) {
         node.querySelectorAll("[data-attach]").forEach(function(n){
             var attachableName = n.dataset.attach + "Attachable";
+            var attachableId = n.dataset.attach;
+            if(n.dataset.attachId != undefined)
+                attachableId = n.dataset.attachId;
             try{
-                if(self.attachables[attachableName])
-                    self.attachables[attachableName].push(new window[attachableName](n));
+                if(self.attachables[attachableId])
+                    self.attachables[attachableId].push(new window[attachableName](n));
                 else
-                    self.attachables[attachableName] = [new window[attachableName](n)];
+                    self.attachables[attachableId] = [new window[attachableName](n)];
             }catch(ex){
-                document.write("Unable to load \"" + n.dataset.attach + "\" attachable. Why: " + ex.message + "<hr/>");
+                document.write("Unable to load \"" + n.dataset.attach + " (id:" + attachableId + ")" + "\" attachable. Why: " + ex.message + "<hr/>");
             }
         });
     }
@@ -251,6 +254,17 @@ function monolith() {
 
     self.signalPreloadEnd = function(){
         document.querySelector("monolith-event-emitter").dispatchEvent(preloadended_event);
+    }
+
+    self.getAttachable = function(id) {
+        var attArr = self.attachables[id];
+        if(attArr){
+            if(attArr.length == 1)
+                return attArr[0];
+            return attArr;
+        }
+
+        return null;
     }
 
     init();

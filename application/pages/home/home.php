@@ -1,4 +1,4 @@
-<div data-attach="home">
+<div data-attach="home" data-attach-id="homelogo">
     <div id="monolith_logo">
         <img src="/application/assets/images/monolith.png" />
         <hr />

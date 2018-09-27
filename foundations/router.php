@@ -17,11 +17,11 @@
         if(stripos($route,$knownroute) === 0){
             $routedata = $data;
             $strippedpath = ltrim(str_replace($knownroute,"",$route),"/");
-            $params['params'] = explode("/",$strippedpath); 
+            $params['params'] = explode("/",$strippedpath);
             break;
         }
     }
-    
+
     if(isset($_POST['monolith_navigation']) || $routedata['type'] == "raw"){
         if($d = dispatcherExists($routedata['dispatcher']))
             processDispatcher($d,$routedata['dispatcher'],$routedata['dispatcher'],$params);
@@ -32,7 +32,7 @@
             processDispatcher(__FD_DIR . "wrapperdispatcher.php", $routedata['dispatcher'], "wrapper" ,$params);
         else
             throw new Exception("Dispatcher is missing for route \"$route\"");
-    }    
+    }
 
     function dispatcherExists($dispatcher) {
         $dispatcherPath = __AP_DIR . "dispatchers/{$dispatcher}.php";

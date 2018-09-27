@@ -1,21 +1,14 @@
-<?php 
+<?php
     class HomeDispatcher extends NavPageDispatcherType {
 
         function __construct($requestdata) {
             $this->name = "home";
+            $this->mainmarkup = "home";
             $this->pagetitle = "monolith::Home";
             parent::__construct($requestdata);
         }
 
-        function dispatch() {
-            ob_start();
-            echo $this->content();
-            $this->output = ob_get_contents();
-            ob_end_clean();
-            parent::dispatch();
-        }
-
-        function content(){
+        function pagedata() {
             global $_db;
 
             $data = array(
@@ -24,8 +17,7 @@
 
             // All your data are belong to here (yeah, grammar error intended. l2meme)
 
-            extract($data,EXTR_OVERWRITE);
-            require __AP_DIR . "/pages/{$this->name}/main.php";
+            return $data;
         }
 
     }

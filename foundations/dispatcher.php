@@ -8,6 +8,8 @@
             $this->requestdata = $requestdata;
 
             foreach(Configuration::pluggables as $pluggable=>$pluggable_conf){
+                if(!$pluggable_conf['enabled'])
+                    continue;
                 $pluggablepath = __FD_DIR . "pluggables/{$pluggable}.php";
                 if(!file_exists($pluggablepath))
                     throw new Exception("Unable to load pluggable \"{$pluggable}\": file not found");

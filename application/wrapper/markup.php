@@ -24,7 +24,7 @@
         <monolith-stage data-relevance="stage"></monolith-stage>
         <monolith-preload-curtain></monolith-preload-curtain>
         <script type="text/javascript" src="/foundations/monolith.js"></script>
-        <script type="text/javascript" src="/application/wrapper/scripts/main.js"></script>
+        <script type="text/javascript" src="/application/wrapper/wrapper.js"></script>
         <script type="text/javascript">{{SCRIPTPACK}}</script>
     </body>
 </html>

@@ -31,6 +31,5 @@
         $exceptionmarkup = ob_get_contents();
         ob_end_clean();
         echo str_replace("{{WHAT}}","PHP Error",$exceptionmarkup);
-        die();
     }
 ?>
