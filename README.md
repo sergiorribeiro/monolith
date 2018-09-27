@@ -11,6 +11,12 @@
 ## version 0.4a
 - Minor tweaks
 - SMTP Mailer Pluggable (PHPMailer SMTP)
+## version 0.5a (breaking version)
+- Structural rearrangements
+- Better error handling
+- Better dispatchers
+- Better attachable identification
+- Pluggable toggling
 
 ## Raising monolith
 - Copy under a environment capable of executing PHP
