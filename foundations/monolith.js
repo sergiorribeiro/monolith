@@ -220,17 +220,15 @@ function monolith() {
 
     self.attachScripts = function(node) {
         node.querySelectorAll("[data-attach]").forEach(function(n){
-            var attachableName = n.dataset.attach + "Attachable";
-            var attachableId = n.dataset.attach;
-            if(n.dataset.attachId != undefined)
-                attachableId = n.dataset.attachId;
+            var attachableName = n.dataset.attach.split("@")[0] + "Attachable";
+            var attachableId = n.dataset.attach.split("@")[1];
             try{
                 if(self.attachables[attachableId])
                     self.attachables[attachableId].push(new window[attachableName](n));
                 else
                     self.attachables[attachableId] = [new window[attachableName](n)];
             }catch(ex){
-                document.write("Unable to load \"" + n.dataset.attach + " (id:" + attachableId + ")" + "\" attachable. Why: " + ex.message + "<hr/>");
+                document.write("Unable to load \"" + attachableName + " (id:" + attachableId + ")" + "\" attachable. Why: " + ex.message + "<hr/>");
             }
         });
     }
