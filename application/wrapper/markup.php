@@ -7,24 +7,11 @@
         <link rel="shortcut icon" href="/application/assets/icons/favicon.ico">
         <link rel="icon" href="/application/assets/icons/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="/application/assets/styles/style.css">
-        <script type="text/javascript">
-            window.monolith_stack = {
-                configs: {
-                    defaultDispatcher: "{{DEFAULT_DISPATCHER}}",
-                    omitDefaultRoute: "{{OMIT_DEFAULT_ROUTE}}",
-                    allowSamePageNavigation: "{{ALLOW_SAME_PAGE_NAV}}"
-                },
-                action_queue: [{action:"auto_load",data: "{{PAGE}}"}]
-            };
-        </script>
+        <?php wrapperInjection("head") ?>
     </head>
     <body>
-        <monolith-event-emitter></monolith-event-emitter>
-        <monolith-stage data-relevance="buffer"></monolith-stage>
-        <monolith-stage data-relevance="stage"></monolith-stage>
-        <monolith-preload-curtain></monolith-preload-curtain>
-        <script type="text/javascript" src="/foundations/monolith.js"></script>
+        <?php wrapperInjection("body") ?>
         <script type="text/javascript" src="/application/wrapper/wrapper.js"></script>
-        <script type="text/javascript">{{SCRIPTPACK}}</script>
+        <?php wrapperInjection("scriptpack") ?>
     </body>
 </html>

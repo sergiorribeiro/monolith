@@ -1,4 +1,4 @@
-<?php 
+<?php
     class NavPageDispatcherType extends Dispatcher {
         public $pagetitle = "";
         public $mainmarkup = "";
@@ -6,7 +6,7 @@
         function dispatch() {
             ob_start();
             extract($this->pagedata(),EXTR_OVERWRITE);
-            require __AP_DIR . "/pages/{$this->name}/{$this->mainmarkup}.php";
+            require __AP_DIR . "/" . Configuration::navigationPagesFolder . "/{$this->name}/{$this->mainmarkup}.php";
             $this->output = ob_get_contents();
             ob_end_clean();
 

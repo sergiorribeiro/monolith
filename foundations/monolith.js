@@ -9,7 +9,7 @@ function monolith() {
     var queuedTransition = "";
 
     self.consts = {
-        version: "0.5a",
+        version: "0.51a",
         stage_transitions: {
             CROSSFADE: 1,
             SLIDE_LEFT: 2,

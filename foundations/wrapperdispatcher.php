@@ -13,7 +13,7 @@
 
         function content(){
             ob_start();
-            require_once __AP_DIR . "/wrapper/markup.php";
+            require_once __AP_DIR . Configuration::wrapperMarkup;
             $this->output = ob_get_contents();
             ob_end_clean();
 

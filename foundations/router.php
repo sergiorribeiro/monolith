@@ -35,7 +35,7 @@
     }
 
     function dispatcherExists($dispatcher) {
-        $dispatcherPath = __AP_DIR . "dispatchers/{$dispatcher}.php";
+        $dispatcherPath = __AP_DIR . Configuration::dispatchersFolder . "/{$dispatcher}.php";
         if(file_exists($dispatcherPath))
             return $dispatcherPath;
         return false;

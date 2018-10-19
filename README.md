@@ -18,6 +18,9 @@
 - Better attachable identification
 - Pluggable toggling
 
+## version 0.51a (breaking version)
+- Structural rearrangements
+
 ## Raising monolith
 - Copy under a environment capable of executing PHP
 - Install SASS

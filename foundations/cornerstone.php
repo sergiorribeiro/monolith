@@ -1,7 +1,7 @@
 <?php 
     set_exception_handler("exception_handler");
     set_error_handler("error_handler");
-    require_once(__FD_DIR . "config.php");
+    require_once(__CONFIG_FILE);
     require_once(__FD_DIR . "dispatcher.php");
 
     $dispatchertypes = array_filter(glob(__FD_DIR . "dispatchertypes/*.php"), "is_file");
@@ -31,5 +31,19 @@
         $exceptionmarkup = ob_get_contents();
         ob_end_clean();
         echo str_replace("{{WHAT}}","PHP Error",$exceptionmarkup);
+    }
+
+    function wrapperInjection($part) {
+        switch($part) {
+            case "head":
+                require(__FD_DIR . "wrapperheadinc.php");
+                break;
+            case "body":
+                require(__FD_DIR . "wrapperbodyinc.php");
+                break;
+            case "scriptpack"
+                ?><script type="text/javascript">{{SCRIPTPACK}}</script><?php
+                break;
+        }
     }
 ?>
