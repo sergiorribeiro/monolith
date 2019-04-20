@@ -21,6 +21,12 @@
 ## version 0.51a (breaking version)
 - Structural rearrangements
 
+## version 0.6a (breaking version)
+- Better script packing
+- Sub-folder support
+- Invalid route custom page
+- Javascript constants, from configuration
+
 ## Raising monolith
 - Copy under a environment capable of executing PHP
 - Install SASS
@@ -28,4 +34,4 @@
 - Live long
 - And prosper
 
-# structure explanation soon
+# structure explanation soon (i promise)
