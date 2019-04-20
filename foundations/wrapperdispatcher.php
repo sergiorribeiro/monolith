@@ -28,11 +28,14 @@
                 }
             }
 
+            file_put_contents(__AP_DIR . Configuration::packedScriptsLocation . "/pack.js", $scriptpack);
+
             $reps = array(
                 "PAGE" => $this->requestdata['page'],
-                "SCRIPTPACK" => $scriptpack,
+                "ROUTE" => $this->requestdata['path'],
                 "OMIT_DEFAULT_ROUTE" => Configuration::omitDefaultRoute,
                 "DEFAULT_DISPATCHER" => Configuration::defaultDispatcher,
+                "ALLOW_SAME_PAGE_NAV" => Configuration::allowSamePageNavigation,
                 "AP_DIR" => baseURL(array("application")),
                 "FD_DIR" => baseURL(array("foundations"))
             );

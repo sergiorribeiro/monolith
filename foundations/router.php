@@ -5,6 +5,7 @@
     if($route == "")
         $route = $dispatchername;
     $params = array(
+        "path" => isset($_GET['path']) ? $_GET['path'] : $dispatchername,
         "postdata" => $_POST,
         "getdata" => $_GET,
         "filedata" => $_FILES,
@@ -18,6 +19,7 @@
             $routedata = $data;
             $strippedpath = ltrim(str_replace($knownroute,"",$route),"/");
             $params['params'] = explode("/",$strippedpath);
+            $params['path'] = $knownroute . "/" . $strippedpath;
             break;
         }
     }
@@ -26,12 +28,12 @@
         if($d = dispatcherExists($routedata['dispatcher']))
             processDispatcher($d,$routedata['dispatcher'],$routedata['dispatcher'],$params);
         else
-            throw new Exception("Dispatcher is missing for route \"$route\"");
+            invalidRoute($route);
     }else{
         if(dispatcherExists($routedata['dispatcher']))
             processDispatcher(__FD_DIR . "wrapperdispatcher.php", $routedata['dispatcher'], "wrapper" ,$params);
         else
-            throw new Exception("Dispatcher is missing for route \"$route\"");
+            invalidRoute($route);
     }
 
     function dispatcherExists($dispatcher) {
@@ -48,5 +50,12 @@
         $dispatcherInstance = new $dispatcherClassName($requestdata);
         $dispatcherInstance->dispatch();
         exit;
+    }
+
+    function invalidRoute($route){
+        if(Configuration::showExceptions)
+            throw new Exception("No \"{$this->name}\" dispatch override found");
+
+        require __AP_DIR . "/errors/404.php";
     }
 ?>

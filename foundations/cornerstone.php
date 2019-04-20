@@ -1,4 +1,4 @@
-<?php 
+<?php
     set_exception_handler("exception_handler");
     set_error_handler("error_handler");
     require_once(__CONFIG_FILE);
@@ -41,8 +41,8 @@
             case "body":
                 require(__FD_DIR . "wrapperbodyinc.php");
                 break;
-            case "scriptpack"
-                ?><script type="text/javascript">{{SCRIPTPACK}}</script><?php
+            case "scriptpack":
+                ?><script type="text/javascript" src="<?=baseURL(array("application",Configuration::packedScriptsLocation,"pack.js"))?>"></script><?php
                 break;
         }
     }

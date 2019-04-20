@@ -5,7 +5,7 @@
         <p><?=$description?></p>
         <hr />
         <p>
-            <small>You're all set up!</small>
+            <small id="jsexample"></small>
         </p>
     </div>
 </div>

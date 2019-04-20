@@ -8,6 +8,8 @@ function homeAttachable(node) {
             // This may vary, but usually, you want to signal preload end at the page init
             window.monolith.signalPreloadEnd();
         });
+
+        node.querySelector("#jsexample").innerText = monolith_stack.constants.message;
     }
 
     init();
