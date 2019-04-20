@@ -13,6 +13,9 @@
         const javascriptConstants = array(
             "message" => "You're all set up!"
         );
+        const wrapperConstants = array(
+            "google_analytics" => "GA-12345678"
+        );
         const routes = array(
             "home" => array("type" => "nav", "dispatcher" => "home"),
             "custom/sample/route" => array("type" => "raw", "dispatcher" => "custom"),

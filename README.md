@@ -27,6 +27,9 @@
 - Invalid route custom page
 - Javascript constants, from configuration
 
+## version 0.61a
+- Wrapper constants, from configuration
+
 ## Raising monolith
 - Copy under a environment capable of executing PHP
 - Install SASS

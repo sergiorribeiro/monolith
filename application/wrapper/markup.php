@@ -8,6 +8,7 @@
         <link rel="icon" href="{{AP_DIR}}/assets/icons/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="{{AP_DIR}}/assets/styles/style.css">
         <?php wrapperInjection("head") ?>
+        <!-- Analytics tracking code here, for example. Tracking code from configuration: {{google_analytics}} -->
     </head>
     <body>
         <?php wrapperInjection("body") ?>

@@ -40,6 +40,8 @@
                 "FD_DIR" => baseURL(array("foundations"))
             );
 
+            $reps = array_merge($reps,Configuration::wrapperConstants);
+
             foreach($reps as $key => $value)
                 $this->output = str_replace("{{{$key}}}",$value,$this->output);
         }
