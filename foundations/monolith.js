@@ -9,7 +9,7 @@ function monolith() {
     var queuedTransition = "";
 
     self.consts = {
-        version: "0.51a",
+        version: "0.6a",
         stage_transitions: {
             CROSSFADE: 1,
             SLIDE_LEFT: 2,
@@ -61,6 +61,16 @@ function monolith() {
             var page = this.dataset.goto;
             monolith.navigate(page);
         },
+
+        url: function(relative){
+            var url = "/" + window.monolith_stack.configs.baseDir + "/";
+            if(!relative)
+                return url;
+            url += relative;
+            while(url.indexOf("\/\/")!=-1)
+                url = url.replace(/\/\//g,"/");
+            return url;
+        }
     }
 
     function init() {
@@ -167,8 +177,9 @@ function monolith() {
         var params = "monolith_navigation";
         params += "&page=" + page;
         self.currentPage = page;
+        var base = window.monolith_stack.configs.baseDir.replace("/application","/");
 
-        self.utils.fetchAsync("/" + page ,params,function(response){
+        self.utils.fetchAsync(base + page ,params,function(response){
             var buffer = document.querySelector("[data-relevance='buffer']");
             var dummy = document.createElement("DIV");
             try {
@@ -194,7 +205,7 @@ function monolith() {
 			}
 
             if(monolith_stack.configs.defaultDispatcher == page && monolith_stack.configs.omitDefaultRoute == "1")
-                history.pushState({}, "", "/");
+                history.pushState({}, "", base);
             else
                 history.pushState({}, "", page);
 

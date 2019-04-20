@@ -46,4 +46,13 @@
                 break;
         }
     }
+
+    function baseURL($nodes = array()) {
+        $base = Configuration::applicationBaseUrl;
+        foreach($nodes as $node)
+            $base .= "/$node";
+        while(stripos($base,"//") !== FALSE)
+            $base = str_replace("//","/",$base);
+        return $base;
+    }
 ?>

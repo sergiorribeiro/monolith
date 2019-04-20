@@ -1,6 +1,6 @@
 <?php
     class Configuration {
-        const showExceptions = true;
+        const applicationBaseUrl = "/";
         const defaultDispatcher = "home";
         const omitDefaultRoute = true;
         const allowSamePageNavigation = false;

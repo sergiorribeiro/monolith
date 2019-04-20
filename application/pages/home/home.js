@@ -3,7 +3,7 @@ function homeAttachable(node) {
 
     function init() {
         monolith.utils.preloadImages([
-            "/application/assets/images/monolith.png"
+            monolith.utils.url("/assets/images/monolith.png")
         ],function(){
             // This may vary, but usually, you want to signal preload end at the page init
             window.monolith.signalPreloadEnd();

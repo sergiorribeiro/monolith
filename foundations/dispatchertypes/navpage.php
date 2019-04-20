@@ -21,7 +21,7 @@
 
             echo json_encode(array(
                 "pagetitle" => $this->pagetitle,
-                "output" => $this->output
+                "output" => str_replace("{{APP}}",baseUrl(array("application")),$this->output)
             ));
             die();
         }
